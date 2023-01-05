@@ -46,15 +46,15 @@ public class RegionDAO {
 
     public boolean update(Region region){
         try {
-            String query = "UPDATE REGIONS SET region_id = ?, region_name = ? WHERE region_id = ?";
+            String query = "UPDATE REGIONS SET region_name = ? WHERE region_id = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(query);
-            prepareStatement.setInt(1, region.getRegionId());
-            prepareStatement.setString(2, region.getRegionName());
-            prepareStatement.setInt(3, region.getRegionId());
-            prepareStatement.execute();
+ //           prepareStatement.setInt(1, region.getRegionId());
+            prepareStatement.setString(1, region.getRegionName());
+            prepareStatement.setInt(2, region.getRegionId());
+            prepareStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.getMessage();
         }
         return false;
     }
@@ -70,5 +70,22 @@ public class RegionDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Region getById(Integer id) {
+        Region region = new Region();
+        try {
+            String query = "SELECT * FROM REGIONS WHERE region_id=?";
+            PreparedStatement prepareStatement = connection.prepareStatement(query);
+            prepareStatement.setInt(1, id);
+            ResultSet resultSet = prepareStatement.executeQuery();
+            while (resultSet.next()) {
+                region.setRegionId(resultSet.getInt(1));
+                region.setRegionName(resultSet.getString(2));           
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return region;
     }
 }

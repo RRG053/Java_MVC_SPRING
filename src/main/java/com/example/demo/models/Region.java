@@ -11,7 +11,7 @@ public class Region {
     @Column (name = "regionId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OneToMany(mappedBy = "division")    
-    private int regionId;
+    private Integer regionId;
 
     @Column (name = "regionName", nullable = false)
     private String regionName;
