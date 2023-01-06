@@ -25,11 +25,11 @@ public class RegionController {
         return "region/ViewGetAllRegion";
     }
 
-    @GetMapping(value = {"form", "form/{regionId}"})
-    public String create(@PathVariable (required = false) Integer regionId, Model model){
+    @GetMapping(value = {"form", "form/{Id}"})
+    public String create(@PathVariable (required = false) Integer Id, Model model){
         //Object data = rrdao.getById(regionId);
-        if(regionId!=null){
-            model.addAttribute("region", rrdao.getById(regionId));
+        if(Id!=null){
+            model.addAttribute("region", rrdao.getById(Id));
         }else{
             model.addAttribute("region", new Region());
         }
@@ -51,7 +51,7 @@ public class RegionController {
     @PostMapping("save")
     public String save(@Nullable Region region){
        boolean result;
-        if(region.getRegionId() == null){
+        if(region.getId() == null){
             result = rrdao.insert(region);
         }else{
             result = rrdao.update(region);
@@ -98,9 +98,9 @@ public class RegionController {
     // }
 
     //? (Bikin method baru dari method di atas, menambah PathVariable regionId, dan disable if)
-    @GetMapping("/delete/{regionId}")
-    public String delete(@PathVariable Integer regionId, Region region){
-        rrdao.delete(regionId);
+    @GetMapping("/delete/{Id}")
+    public String delete(@PathVariable Integer Id, Region region){
+        rrdao.delete(Id);
         // if(result){
         //     return "redirect:/region";
         // }else{

@@ -20,10 +20,10 @@
             </tr>
             <tbody>
                 <tr th:each="x : ${region}">
-                    <td th:text="${x.regionId}"></td>
-                    <td th:text="${x.regionName}"></td>
-                    <td><a th:href="@{/region/form/{regionId} (regionId=${x.regionId})}">Edit</a>
-                    <a th:href="@{/region/delete/{regionId} (regionId=${x.getRegionId()})}">Delete</a></td>
+                    <td th:text="${x.Id}"></td>
+                    <td th:text="${x.Name}"></td>
+                    <td><a th:href="@{/region/form/{Id} (Id=${x.Id})}">Edit</a>
+                    <a th:href="@{/region/delete/{Id} (Id=${x.getId()})}">Delete</a></td>
                 </tr>
             </tbody>
         </table>

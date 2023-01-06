@@ -10,8 +10,8 @@ public class Test {
         System.out.println(DBConnection.getConnection());
         RegionDAO rdao = new RegionDAO(DBConnection.getConnection());
         for (Region region : rdao.getAll()){
-            System.out.print(region.getRegionId()+" ");
-            System.out.println(region.getRegionName());
+            System.out.print(region.getId()+" ");
+            System.out.println(region.getName());
     
         }
         // Region region = new Region();
@@ -25,7 +25,7 @@ public class Test {
         DivisionDAO ddao = new DivisionDAO(DBConnection.getConnection());
         for (Division division : ddao.getAll()){
             System.out.print(division.getregionId()+" ");
-            System.out.println(division.getDivisionName());
+            System.out.println(division.getName());
             System.out.println(division.getregionId());
     
         }

@@ -8,28 +8,28 @@ import javax.persistence.*;
 
 public class Region {
     @Id
-    @Column (name = "regionId")
+    @Column (name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @OneToMany(mappedBy = "division")    
-    private Integer regionId;
+    private Integer Id;
 
-    @Column (name = "regionName")
-    private String regionName;
+    @Column (name = "name")
+    private String Name;
 
-    public Integer getRegionId(){
-        return regionId;
+    public Integer getId(){
+        return Id;
     }
 
-    public void setRegionId(Integer regionId){
-        this.regionId = regionId;
+    public void setId(Integer Id){
+        this.Id = Id;
     }
 
-    public String getRegionName(){
-        return regionName;
+    public String getName(){
+        return Name;
     }
     
-    public void setRegionName(String regionName){
-        this.regionName = regionName;
+    public void setName(String Name){
+        this.Name = Name;
     }
     
 }

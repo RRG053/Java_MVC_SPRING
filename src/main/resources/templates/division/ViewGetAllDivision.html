@@ -7,6 +7,11 @@
 </head>
 <body>
     <div class="container">
+            <a 
+        class="btn btn-primary"
+        style="margin-bottom: 10xp; margin-top: 10xp; color: azure"
+        th:href="@{/division/form}"
+        >CREATE NEW</a>
         <table class="table">
             <tr>
                 <th>ID</th>
@@ -14,11 +19,13 @@
                 <th>ACTION</th>
             </tr>
             <tbody>
-                <tr th:each="x : ${dataselect}">
-                    <td th:text="${x.getDivisionId()}"></td>
-                    <td th:text="${x.getDivisionName()}"></td>
-                    <td th:text="${x.getregionId()}"></td>
-                    <td> Edit | Delete </td>
+                <tr th:each="x : ${division}">
+                    <td th:text="${x.Id}"></td>
+                    <td th:text="${x.Name}"></td>
+                    <td th:text="${x.regionId}"></td>
+
+                    <td><a th:href="@{/division/form/{Id} (Id=${x.Id})}">Edit</a>
+                    <a th:href="@{/division/delete/{Id} (Id=${x.getId()})}">Delete</a></td>
                 </tr>
             </tbody>
         </table>

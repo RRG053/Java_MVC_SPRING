@@ -6,36 +6,37 @@ import javax.persistence.*;
 
 public class Division {
     @Id
-    @Column (name = "divisionId")
+    @Column (name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int divisionId;
+    private Integer Id;
 
-    @Column (name = "divisionName", nullable = false)
-    private String divisionName;
+    @Column (name = "name", nullable = false)
+    private String Name;
 
     @ManyToOne
-    private int regionid;
+    @JoinColumn(name = "regionId")
+    private Integer regionId;
 
-    public int getDivisionId(){
-        return divisionId;
+    public Integer getId(){
+        return Id;
     }
 
-    public void setDivisionId(Integer divisionId){
-        this.divisionId = divisionId;
+    public void setId(Integer Id){
+        this.Id = Id;
     }
 
-    public String getDivisionName(){
-        return divisionName;
+    public String getName(){
+        return Name;
     }
     
-    public void setDivisionName(String divisionName){
-        this.divisionName = divisionName;
+    public void setName(String Name){
+        this.Name = Name;
     }
-    public int getregionId(){
-        return regionid;
+    public Integer getregionId(){
+        return regionId;
     }
 
-    public void setregionId(Integer regionid){
-        this.regionid = regionid;
+    public void setregionId(Integer regionId){
+        this.regionId = regionId;
     }
 }

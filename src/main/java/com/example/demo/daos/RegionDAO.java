@@ -21,8 +21,8 @@ public class RegionDAO {
                     .executeQuery();
             while (resultSet.next()) {
                 Region region = new Region();
-                region.setRegionId(resultSet.getInt(1));
-                region.setRegionName(resultSet.getString(2));
+                region.setId(resultSet.getInt(1));
+                region.setName(resultSet.getString(2));
                 regions.add(region);
             }
         } catch (SQLException e){
@@ -33,8 +33,8 @@ public class RegionDAO {
     
     public boolean insert(Region region){
         try{
-            PreparedStatement prepareStatement = connection.prepareStatement("INSERT INTO REGIONS(region_name) VALUES(?)");
-            prepareStatement.setString(1, region.getRegionName());
+            PreparedStatement prepareStatement = connection.prepareStatement("INSERT INTO REGIONS(name) VALUES(?)");
+            prepareStatement.setString(1, region.getName());
             prepareStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -45,11 +45,11 @@ public class RegionDAO {
 
     public boolean update(Region region){
         try {
-            String query = "UPDATE REGIONS SET region_name = ? WHERE region_id = ?";
+            String query = "UPDATE REGIONS SET name = ? WHERE id = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(query);
  //           prepareStatement.setInt(1, region.getRegionId());
-            prepareStatement.setString(1, region.getRegionName());
-            prepareStatement.setInt(2, region.getRegionId());
+            prepareStatement.setString(1, region.getName());
+            prepareStatement.setInt(2, region.getId());
             prepareStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -61,7 +61,7 @@ public class RegionDAO {
     //? (Change object region to integer id in parameter and change setInt to id)
     public boolean delete(Integer id){
         try {
-            String query = "DELETE FROM REGIONS WHERE region_id = ?";
+            String query = "DELETE FROM REGIONS WHERE id = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(query);
             prepareStatement.setInt(1, id);
             prepareStatement.execute();
@@ -75,13 +75,13 @@ public class RegionDAO {
     public Region getById(Integer id) {
         Region region = new Region();
         try {
-            String query = "SELECT * FROM REGIONS WHERE region_id=?";
+            String query = "SELECT * FROM REGIONS WHERE id=?";
             PreparedStatement prepareStatement = connection.prepareStatement(query);
             prepareStatement.setInt(1, id);
             ResultSet resultSet = prepareStatement.executeQuery();
             while (resultSet.next()) {
-                region.setRegionId(resultSet.getInt(1));
-                region.setRegionName(resultSet.getString(2));           
+                region.setId(resultSet.getInt(1));
+                region.setName(resultSet.getString(2));           
             }
         } catch (SQLException e){
             e.printStackTrace();

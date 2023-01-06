@@ -21,8 +21,8 @@ public class DivisionDAO {
                     .executeQuery();
             while (resultSet.next()) {
                 Division division = new Division();
-                division.setDivisionId(resultSet.getInt(1));
-                division.setDivisionName(resultSet.getString(2));
+                division.setId(resultSet.getInt(1));
+                division.setName(resultSet.getString(2));
                 division.setregionId(resultSet.getInt(3));
 
                 divisions.add(division);
@@ -35,10 +35,10 @@ public class DivisionDAO {
     
     public boolean insert(Division division){
         try{
-            PreparedStatement prepareStatement = connections.prepareStatement("INSERT INTO DIVISION(division_id, division_name, region_id) VALUES(?,?,?)");
-            prepareStatement.setInt(1, division.getDivisionId());
-            prepareStatement.setString(2, division.getDivisionName());
-            prepareStatement.setInt(3, division.getregionId());
+            PreparedStatement prepareStatement = connections.prepareStatement("INSERT INTO DIVISION(name, regionId) VALUES(?,?)");
+//            prepareStatement.setInt(1, division.getId());
+            prepareStatement.setString(1, division.getName());
+            prepareStatement.setInt(2, division.getregionId());
 
             prepareStatement.execute();
             return true;
@@ -50,13 +50,25 @@ public class DivisionDAO {
 
     public boolean update(Division division){
         try {
-            String query = "UPDATE DIVISION SET division_id = ?, division_name = ?, region_id = ? WHERE division_id = ?";
+            String query = "UPDATE DIVISION SET name = ?, regionId = ? WHERE id = ?";
             PreparedStatement prepareStatement = connections.prepareStatement(query);
-            prepareStatement.setInt(1, division.getDivisionId());
-            prepareStatement.setString(2, division.getDivisionName());
-            prepareStatement.setInt(3, division.getregionId());
-            prepareStatement.setInt(4, division.getDivisionId());
+ //           prepareStatement.setInt(1, division.getId());
+            prepareStatement.setString(1, division.getName());
+            prepareStatement.setInt(2, division.getregionId());
+            prepareStatement.setInt(3, division.getId());
+            prepareStatement.execute();
+            return true;
+        } catch (SQLException e) {
+            e.getMessage();
+        }
+        return false;
+    }
 
+    public boolean delete(Integer id){
+        try {
+            String query = "DELETE FROM DIVISION WHERE id = ?";
+            PreparedStatement prepareStatement = connections.prepareStatement(query);
+            prepareStatement.setInt(1, id);
             prepareStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -65,16 +77,20 @@ public class DivisionDAO {
         return false;
     }
 
-    public boolean delete(Division division){
+    public Division getById(Integer id) {
+        Division division = new Division();
         try {
-            String query = "DELETE FROM DIVISION WHERE division_id = ?";
+            String query = "SELECT * FROM DIVISION WHERE id=?";
             PreparedStatement prepareStatement = connections.prepareStatement(query);
-            prepareStatement.setInt(1, division.getDivisionId());
-            prepareStatement.execute();
-            return true;
-        } catch (SQLException e) {
+            prepareStatement.setInt(1, id);
+            ResultSet resultSet = prepareStatement.executeQuery();
+            while (resultSet.next()) {
+                division.setId(resultSet.getInt(1));
+                division.setName(resultSet.getString(2));           
+            }
+        } catch (SQLException e){
             e.printStackTrace();
         }
-        return false;
+        return division;
     }
 }
