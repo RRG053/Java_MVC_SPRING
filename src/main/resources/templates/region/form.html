@@ -7,7 +7,7 @@
     <body>
         <div class="container">
             <form
-                th:action="@{/region/form}"
+                th:action="@{/region/save}"
                 method="post"
                 th:object="${region}">
                 <div class="form-group" hidden>
@@ -18,7 +18,7 @@
                     <label for="name" class="col-form-label">NAME</label>
                     <input type="text" class="form-control" id="name" th:field="*{regionName}"/>
                 </div>
-                <button type="submit" class="btn btn-primary" >SUMBIT</button>
+                <button type="submit" class="btn btn-primary">SUMBIT</button>
             </form>
 
         </div>

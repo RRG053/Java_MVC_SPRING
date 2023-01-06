@@ -13,10 +13,10 @@ public class Region {
     @OneToMany(mappedBy = "division")    
     private Integer regionId;
 
-    @Column (name = "regionName", nullable = false)
+    @Column (name = "regionName")
     private String regionName;
 
-    public int getRegionId(){
+    public Integer getRegionId(){
         return regionId;
     }
 

@@ -33,9 +33,8 @@ public class RegionDAO {
     
     public boolean insert(Region region){
         try{
-            PreparedStatement prepareStatement = connection.prepareStatement("INSERT INTO REGIONS(region_id, region_name) VALUES(?,?)");
-            prepareStatement.setInt(1, region.getRegionId());
-            prepareStatement.setString(2, region.getRegionName());
+            PreparedStatement prepareStatement = connection.prepareStatement("INSERT INTO REGIONS(region_name) VALUES(?)");
+            prepareStatement.setString(1, region.getRegionName());
             prepareStatement.execute();
             return true;
         } catch (SQLException e) {
@@ -59,11 +58,12 @@ public class RegionDAO {
         return false;
     }
 
-    public boolean delete(Region region){
+    //? (Change object region to integer id in parameter and change setInt to id)
+    public boolean delete(Integer id){
         try {
             String query = "DELETE FROM REGIONS WHERE region_id = ?";
             PreparedStatement prepareStatement = connection.prepareStatement(query);
-            prepareStatement.setInt(1, region.getRegionId());
+            prepareStatement.setInt(1, id);
             prepareStatement.execute();
             return true;
         } catch (SQLException e) {

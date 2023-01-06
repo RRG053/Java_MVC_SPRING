@@ -23,7 +23,7 @@
                     <td th:text="${x.regionId}"></td>
                     <td th:text="${x.regionName}"></td>
                     <td><a th:href="@{/region/form/{regionId} (regionId=${x.regionId})}">Edit</a>
-                    <a th:href="@{/region/delete{regionId} (id=${x.getRegionId()})}">Delete</a></td>
+                    <a th:href="@{/region/delete/{regionId} (regionId=${x.getRegionId()})}">Delete</a></td>
                 </tr>
             </tbody>
         </table>
