@@ -15,7 +15,6 @@ public class Division {
 
     @ManyToOne
     @JoinColumn(name = "regionId")
-    @Column(name = "regionId")
     private Region region;
 
     public Integer getId(){

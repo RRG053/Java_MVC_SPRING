@@ -15,7 +15,7 @@ public class DivisionDAO {
 
     public List<Division> getAll(){
         List<Division> divisions = new ArrayList<>();
-        String query = "select * from division d join regions r on d.id=r.id";
+        String query = "select * from division d join regions r on d.regionid=r.id";
         try {
             ResultSet resultSet = connections
                     .prepareStatement(query)
@@ -39,10 +39,10 @@ public class DivisionDAO {
     
     public boolean insert(Division division){
         try{
-            PreparedStatement prepareStatement = connections.prepareStatement("INSERT INTO DIVISION(name, regionId) VALUES(?,?)");
+            PreparedStatement prepareStatement = connections.prepareStatement("INSERT INTO DIVISION(name, regionId) VALUES(?,1)");
 //            prepareStatement.setInt(1, division.getId());
-            prepareStatement.setString(1, division.getName());
-            prepareStatement.setInt(2, division.getregion().getId());
+            prepareStatement.setString(1, division.getName());  
+//            prepareStatement.setInt(2, division.getregion().getId());
 
             prepareStatement.execute();
             return true;
@@ -54,12 +54,11 @@ public class DivisionDAO {
 
     public boolean update(Division division){
         try {
-            String query = "UPDATE DIVISION SET name = ?, regionId = ? WHERE id = ?";
+            String query = "UPDATE DIVISION SET name = ? WHERE id = ?";
             PreparedStatement prepareStatement = connections.prepareStatement(query);
  //           prepareStatement.setInt(1, division.getId());
             prepareStatement.setString(1, division.getName());
-            prepareStatement.setInt(2, division.getregion().getId());
-            prepareStatement.setInt(3, division.getId());
+            prepareStatement.setInt(2, division.getId());
             prepareStatement.execute();
             return true;
         } catch (SQLException e) {
