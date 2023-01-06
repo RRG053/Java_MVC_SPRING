@@ -24,9 +24,9 @@ public class Test {
 
         DivisionDAO ddao = new DivisionDAO(DBConnection.getConnection());
         for (Division division : ddao.getAll()){
-            System.out.print(division.getregionId()+" ");
+            System.out.print(division.getregion()+" ");
             System.out.println(division.getName());
-            System.out.println(division.getregionId());
+            System.out.println(division.getregion());
     
         }
         // Division division = new Division();

@@ -16,13 +16,14 @@
             <tr>
                 <th>ID</th>
                 <th>NAME</th>
+                <th>Region Name</th>
                 <th>ACTION</th>
             </tr>
             <tbody>
                 <tr th:each="x : ${division}">
                     <td th:text="${x.Id}"></td>
                     <td th:text="${x.Name}"></td>
-                    <td th:text="${x.regionId}"></td>
+                    <td th:text="${x.getregion().getName()}"></td>
 
                     <td><a th:href="@{/division/form/{Id} (Id=${x.Id})}">Edit</a>
                     <a th:href="@{/division/delete/{Id} (Id=${x.getId()})}">Delete</a></td>

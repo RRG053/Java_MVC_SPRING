@@ -3,6 +3,7 @@ import java.sql.*;
 import java.util.*;
 
 import com.example.demo.models.Division;
+import com.example.demo.models.Region;
 
 public class DivisionDAO {
 
@@ -14,17 +15,20 @@ public class DivisionDAO {
 
     public List<Division> getAll(){
         List<Division> divisions = new ArrayList<>();
-        String query = "SELECT * FROM DIVISION";
+        String query = "select * from division d join regions r on d.id=r.id";
         try {
             ResultSet resultSet = connections
                     .prepareStatement(query)
                     .executeQuery();
             while (resultSet.next()) {
                 Division division = new Division();
+                Region region = new Region();
+                
                 division.setId(resultSet.getInt(1));
                 division.setName(resultSet.getString(2));
-                division.setregionId(resultSet.getInt(3));
-
+                region.setId(resultSet.getInt(4));
+                region.setName(resultSet.getString(5));
+                division.setregion(region);
                 divisions.add(division);
             }
         } catch (SQLException e){
@@ -38,7 +42,7 @@ public class DivisionDAO {
             PreparedStatement prepareStatement = connections.prepareStatement("INSERT INTO DIVISION(name, regionId) VALUES(?,?)");
 //            prepareStatement.setInt(1, division.getId());
             prepareStatement.setString(1, division.getName());
-            prepareStatement.setInt(2, division.getregionId());
+            prepareStatement.setInt(2, division.getregion().getId());
 
             prepareStatement.execute();
             return true;
@@ -54,7 +58,7 @@ public class DivisionDAO {
             PreparedStatement prepareStatement = connections.prepareStatement(query);
  //           prepareStatement.setInt(1, division.getId());
             prepareStatement.setString(1, division.getName());
-            prepareStatement.setInt(2, division.getregionId());
+            prepareStatement.setInt(2, division.getregion().getId());
             prepareStatement.setInt(3, division.getId());
             prepareStatement.execute();
             return true;

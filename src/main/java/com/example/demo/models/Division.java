@@ -15,7 +15,8 @@ public class Division {
 
     @ManyToOne
     @JoinColumn(name = "regionId")
-    private Integer regionId;
+    @Column(name = "regionId")
+    private Region region;
 
     public Integer getId(){
         return Id;
@@ -32,11 +33,11 @@ public class Division {
     public void setName(String Name){
         this.Name = Name;
     }
-    public Integer getregionId(){
-        return regionId;
+    public Region getregion(){
+        return region;
     }
 
-    public void setregionId(Integer regionId){
-        this.regionId = regionId;
+    public void setregion(Region region){
+        this.region = region;
     }
 }
