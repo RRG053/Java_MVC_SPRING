@@ -39,10 +39,10 @@ public class DivisionDAO {
     
     public boolean insert(Division division){
         try{
-            PreparedStatement prepareStatement = connections.prepareStatement("INSERT INTO DIVISION(name, regionId) VALUES(?,1)");
+            PreparedStatement prepareStatement = connections.prepareStatement("INSERT INTO DIVISION(name, regionId) VALUES(?,?)");
 //            prepareStatement.setInt(1, division.getId());
             prepareStatement.setString(1, division.getName());  
-//            prepareStatement.setInt(2, division.getregion().getId());
+            prepareStatement.setInt(2, division.getregion().getId());
 
             prepareStatement.execute();
             return true;
@@ -54,11 +54,12 @@ public class DivisionDAO {
 
     public boolean update(Division division){
         try {
-            String query = "UPDATE DIVISION SET name = ? WHERE id = ?";
+            String query = "UPDATE DIVISION SET name = ?, regionId = ? WHERE id = ?";
             PreparedStatement prepareStatement = connections.prepareStatement(query);
  //           prepareStatement.setInt(1, division.getId());
             prepareStatement.setString(1, division.getName());
-            prepareStatement.setInt(2, division.getId());
+            prepareStatement.setInt(2, division.getregion().getId());
+            prepareStatement.setInt(3, division.getId());
             prepareStatement.execute();
             return true;
         } catch (SQLException e) {

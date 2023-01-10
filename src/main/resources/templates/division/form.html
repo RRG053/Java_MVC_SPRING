@@ -18,7 +18,17 @@
                     <label for="name" class="col-form-label">NAME</label>
                     <input type="text" class="form-control" id="name" th:field="*{Name}"/>
                 </div>
+                
+                <div class="form-group col-md-4">
+                <label for="region">Choose Region:</label>
+                    <select class = "form-select" name="region" id="region" th:field="*{region.Id}">
+                        <option  th:each="x : ${region}" th:value="${x.Id}" th:text="${x.Name}"></option>
+                    </select>
+                    
+                </div>
+                <div>
                 <button type="submit" class="btn btn-primary">SUMBIT</button>
+                </div>
             </form>
 
         </div>

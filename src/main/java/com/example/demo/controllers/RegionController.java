@@ -22,7 +22,7 @@ public class RegionController {
     public String index(Model model){
         // Object region = new rrdao.getAll();
         model.addAttribute("region", rrdao.getAll());
-        return "region/ViewGetAllRegion";
+        return "region/index";
     }
 
     @GetMapping(value = {"form", "form/{Id}"})
